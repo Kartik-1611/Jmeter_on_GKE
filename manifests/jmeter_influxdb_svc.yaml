@@ -1,0 +1,12 @@
+# IP for InfluxDB VM is given directly in Jmeter jmx file.
+# Can use this if you do not want to specify IP in JMX file and use a service name.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jmeter-influxdb
+spec:
+  ports:
+    - port: 8086
+      name: api
+      targetPort: 8086
