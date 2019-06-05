@@ -1,0 +1,67 @@
+# Service used to expose InfluxDB pods to the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: jmeter-influxdb-svc
+spec:
+  selector:
+    app: influxdb
+  type: ClusterIP
+  ports:
+    - port: 8086
+      name: api
+      targetPort: 8086
+      protocol: TCP
+---
+# Statefulset for InfluxDB
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb
+spec:
+  selector:
+    matchLabels:
+      app: influxdb
+  serviceName: "jmeter-influxdb-svc"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: influxdb
+          image: influxdb
+          env:
+          - name: INFLUXDB_DB
+            value: "jmeter"
+          ports:
+            - containerPort: 8086
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: influxdb
+            - mountPath: /tmp/influx
+              name: influx
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8086
+            initialDelaySeconds: 40
+            timeoutSeconds: 4
+      volumes:
+      - name: influx
+        configMap:
+          name: jmeter-influx-config
+  volumeClaimTemplates:
+  - metadata:
+      name: influxdb
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 50Gi

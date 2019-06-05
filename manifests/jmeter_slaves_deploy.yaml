@@ -5,7 +5,7 @@ metadata:
   labels:
     jmeter_mode: slave
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       jmeter_mode: slave
@@ -20,8 +20,8 @@ spec:
         env:
         resources:
           requests:
-            memory: "1024Mi"
-            cpu: "1000m"
+            memory: "512Mi"
+            cpu: "100m"
           limits:
             memory: "2048Mi"
             cpu: "1500m"
