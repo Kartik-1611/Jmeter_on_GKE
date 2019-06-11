@@ -21,13 +21,12 @@ Once you successfully deploy the K8s clusters, next step is to get the access cr
 
 > Clone this repo first if you haven't done it yet and go the root folder.
 
-Execute the below command in the Cloud Shell for each of the clusters.
+Execute the below command in the terminal, once for each of the clusters.
 ```
 KUBECONFIG=clusters.yaml gcloud beta container clusters get-credentials <cluster-name> --region <region-name> --project <project-name>
 ```
 
-The above command will create a Kubeconfig file in the current folder and will have the credentials for all 3 clusters. Next we will deploy InfluxDB and Grafana in a VM.
-
+The above command will create a Kubeconfig file in the current folder and will have the credentials for all 3 clusters.
 
 ## Deploying resources in K8s clusters
 
