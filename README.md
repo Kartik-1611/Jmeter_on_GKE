@@ -2,8 +2,6 @@
 
 This implementation is for running distributed Load Tests using Jmeter deployed on Kubernetes Pods. The cluster used for this is deployed on Google Kubernetes Engine (GKE).
 
-> You can use any K8s cluster on any Cloud Platform or On-Premises. You just need to populate the Kubeconfig file accordingly.
-
 We will provision the below resources for this implementation :  
 1) Multiple (Multi-Regional) Kubernetes clusters on GKE.  
 2) Jmeter, InfluxDB and Grafana pods in the deployed clusters.
