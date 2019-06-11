@@ -25,7 +25,7 @@ spec:
     matchLabels:
       app: influxdb
   serviceName: "jmeter-influxdb-svc"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
