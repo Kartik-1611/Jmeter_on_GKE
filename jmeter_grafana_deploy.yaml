@@ -42,5 +42,3 @@ spec:
         name: grafana
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
-      nodeSelector:
-        grafana: "true"
