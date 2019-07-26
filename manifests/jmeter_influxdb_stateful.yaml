@@ -44,18 +44,12 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/influxdb
               name: influxdb
-            - mountPath: /tmp/influx
-              name: influx
           livenessProbe:
             httpGet:
               path: /ping
               port: 8086
             initialDelaySeconds: 40
             timeoutSeconds: 4
-      volumes:
-      - name: influx
-        configMap:
-          name: jmeter-influx-config
   volumeClaimTemplates:
   - metadata:
       name: influxdb
